@@ -66,7 +66,79 @@ public class Main {
         }
         
         //Pegar entrada do professor e transformar em OPCODE  e guardar na memória
-        
+        Scanner scan = new Scanner(Code);
+        int i = 0;
+        while(scan.hasNextLine()) {
+            String s = scan.nextLine();
+            
+            Scanner scan2 = new Scanner(s);
+            String certa = scan2.next();
+            
+            //Varios ifs para separar as constantes e adequar os textos de assembly para o futuro OPCODE
+            if (s.contains(",")) {
+                int r1 = -1;
+                int r2 = -1;
+                String r = scan2.next();
+                String rs[] = r.split(",");
+                
+                if (rs[0].contains("[")) {
+                   rs[0] = rs[0].replaceAll("[","");
+                   rs[0] = rs[0].replaceAll("]","");
+                   Scanner scan3 = new Scanner(rs[0]);
+                   if (scan3.hasNextInt()) {
+                       certa += " [CT],";
+                       r1 = scan3.nextInt();
+                   }
+                   else {
+                       certa += " [" + scan3.next() + "],";
+                   }
+                }
+                else {
+                   Scanner scan3 = new Scanner(rs[0]);
+                   if (scan3.hasNextInt()) {
+                       certa += " CT,";
+                       r1 = scan3.nextInt();
+                   }
+                   else {
+                       certa += " " + scan3.next() + ",";
+                   }
+                }
+                
+                if (rs[1].contains("[")) {
+                   rs[1] = rs[1].replaceAll("[","");
+                   rs[1] = rs[1].replaceAll("]","");
+                   Scanner scan3 = new Scanner(rs[1]);
+                   if (scan3.hasNextInt()) {
+                       certa += "[CT]";
+                       r2 = scan3.nextInt();
+                   }
+                   else {
+                       certa += "[" + scan3.next() + "]";
+                   }
+                }
+                else {
+                    Scanner scan3 = new Scanner(rs[0]);
+                    if (scan3.hasNextInt()) {
+                       certa += "CT";
+                       r2 = scan3.nextInt();
+                    }
+                    else {
+                        certa += scan3.next();
+                    }
+                }
+                Memoria.addInitialCode(i,assemblyOpcode.get(certa));
+                if (r1 != -1) Memoria.addInitialCode(++i, Integer.toBinaryString(r1));
+                if (r2 != -1) Memoria.addInitialCode(++i, Integer.toBinaryString(r2));
+            }
+            else { //é um opcode com apenas 1 parametro, no caso, jumps
+                certa += " CT";
+                Memoria.addInitialCode(i,assemblyOpcode.get(certa));
+                Memoria.addInitialCode(++i, Integer.toBinaryString(scan2.nextInt()));
+            }
+            
+            i++;
+        }
+        //criar um Hashmap(palavraHorizontal,comentário) onde cada palavra horizontal tem seu literal ex: MAR <- PC
     }
 
 }

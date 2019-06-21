@@ -2,7 +2,7 @@ package cpu;
 import java.util.*;
 
 public class Memoria {
-    
+    //memoria começa do endereço 0
     private static LinkedList<String> ListaComando = new LinkedList<String>();
     
     private static String buffer = "00000000";
@@ -54,7 +54,7 @@ public class Memoria {
     
 
     //Inserir no endereço de memória o opcode
-    public void addInitialCode(int address,String code){
+    public static void addInitialCode(int address,String code){
         ListaComando.add(address,code); 
     }   
     

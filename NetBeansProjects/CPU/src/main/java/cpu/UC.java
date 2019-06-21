@@ -116,11 +116,7 @@ public class UC {
             if (CBR.charAt(34) == '1') {
                 ULA.operation(Integer.parseInt(CAR,2) - 1);
             }
-            
-            
-            
         }
-        //criar um Hashmap(palavraHorizontal,comentário) onde cada palavra horizontal tem seu literal ex: MAR <- PC
     }
     
     public static String getCBR() {
