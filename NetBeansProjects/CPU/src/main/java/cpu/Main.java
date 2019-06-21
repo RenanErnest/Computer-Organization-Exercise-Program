@@ -12,14 +12,12 @@ public class Main {
     
     //Mapa
     public static Map<String,String> assemblyOpcode = new HashMap<String,String>();
-    //public static Map<Integer,Object> registrador = new HashMap<Integer,Object>();
     
     //Codigo em assembly colocado no programa
     public static String Code; //apresentado na interface grafica
     
     public static void program() {
         //primeiro código chamado ao iniciar o programa
-        //deve conter o assembler transformando em OPCODE e guardando na estrutura de memória sequencialmente
         
         //Map assembly -> OPCODE
         try {
@@ -47,11 +45,11 @@ public class Main {
         
         //Preenchendo Firmware
         //Fetch Cycle
-        UC.Firmware[0] = "0000010000010000000010000000000000"; //MAR <- PC, ULA <- PC
-        UC.Firmware[1] = "0000000000000100000000000000001100"; //Memoria <- MAR
-        UC.Firmware[2] = "0000100000001000000000000001010010"; //PC <- ULA(INC), MBR <- Memoria
-        UC.Firmware[3] = "0000000100000000000000100000000000"; //IR <- MBR
-        UC.Firmware[4] = "1111111111111111111111111111111111"; //indicador para o ciclo de instrução
+        UC.Firmware[0] = "00000100000100000000100000000000000"; //MAR <- PC, ULA <- PC
+        UC.Firmware[1] = "00000000000001000000000000000011000"; //Memoria <- MAR
+        UC.Firmware[2] = "00001000000010000000000000010100101"; //PC <- ULA(INC), MBR <- Memoria
+        UC.Firmware[3] = "00000001000000000000001000000000000"; //IR <- MBR
+        UC.Firmware[4] = "11111111111111111111111111111111111"; //indicador para o ciclo de instrução
         //Resto
         try { 
             InputStream in = new FileInputStream("src\\main\\java\\cpu\\Firmware.txt");
@@ -66,30 +64,7 @@ public class Main {
         catch(Exception e) {
             e.printStackTrace();
         }
-
-        /*registrador.put(1, new AX());
-        registrador.put(2, new BX());
-        registrador.put(3, new CX());
-        registrador.put(4, new DX());
-        registrador.put(5, new PC());
-        registrador.put(6, new MAR());
-        registrador.put(7, new MBR());
-        registrador.put(8, new IR());
-        registrador.put(9, new IR());
-        registrador.put(10, new IR());
-        registrador.put(11, new ULA());
-        registrador.put(12, new ULA());
         
-        registrador.put(17, new AX());
-        registrador.put(18, new BX());
-        registrador.put(19, new CX());
-        registrador.put(20, new DX());
-        registrador.put(21, new PC());
-        registrador.put(23, new MBR);
-        registrador.put(25, new IR());
-        registrador.put(26, new IR());
-        registrador.put(28, new ULA());*/
-
         //Pegar entrada do professor e transformar em OPCODE  e guardar na memória
         
     }

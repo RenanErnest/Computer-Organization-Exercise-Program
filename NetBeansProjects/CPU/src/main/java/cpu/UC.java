@@ -97,6 +97,14 @@ public class UC {
                     }
                 }
             }
+            
+            //porta de saida do PC
+            if (CBR.charAt(20) == '1') ULA.setX(Integer.toBinaryString(1)); //pra dar INC
+            
+            //Sinais para a ULA
+            if (CBR.charAt(34) == '1') {
+                ULA.operation(Integer.parseInt(CAR,2) - 1);
+            }
         }
         //criar um Hashmap(palavraHorizontal,comentário) onde cada palavra horizontal tem seu literal ex: MAR <- PC
     }

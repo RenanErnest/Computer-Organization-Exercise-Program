@@ -2,7 +2,7 @@ package cpu;
 
 public class Barramentos {
     
-    private static String interno = "00000000"; //34 bits
+    private static String interno = "00000000";
 
     private static String externo = "00000000";
     
