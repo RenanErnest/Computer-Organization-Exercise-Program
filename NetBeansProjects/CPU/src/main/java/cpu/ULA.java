@@ -18,7 +18,7 @@ public class ULA {
     
     //codigo de cada operação e também um código que diferencia de acordo com o sinal mandado pela UC
     public static void operation(int i) {
-        if(i>=245 && i<=320) add(); //usa a operação add
+        if((i>=245 && i<=320) || (i>=0 && i<=4)) add(); //usa a operação add
         if(i>=321 && i<=396) sub(); // usa a operação sub
         if(i>=397 && i<=472) mul(); // usa a operação mul
         if(i>=473 && i<=548) div(); // usa a operação div

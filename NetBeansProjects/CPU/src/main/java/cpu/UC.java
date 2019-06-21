@@ -108,7 +108,7 @@ public class UC {
                             Barramentos.setInterno(IR.getP1());
                             break;
                         case 27:
-                            Barramentos.setInterno(AC.get());
+                            Barramentos.setInterno(ULA.getAC());
                             break;    
                     }
                 }

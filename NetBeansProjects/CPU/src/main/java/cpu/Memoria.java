@@ -55,7 +55,8 @@ public class Memoria {
 
     //Inserir no endereço de memória o opcode
     public static void addInitialCode(int address,String code){
-        ListaComando.add(address,code); 
+        ListaComando.add(address,code);
+        System.out.println(address + " - " + code);
     }   
     
 }

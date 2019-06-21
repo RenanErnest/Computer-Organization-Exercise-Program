@@ -45,19 +45,20 @@ public class Main {
         
         //Preenchendo Firmware
         //Fetch Cycle
-        UC.Firmware[0] = "00000100000100000000100000000000000"; //MAR <- PC, ULA <- PC
-        UC.Firmware[1] = "00000000000001000000000000000011000"; //Memoria <- MAR
-        UC.Firmware[2] = "00001000000010000000000000010100101"; //PC <- ULA(INC), MBR <- Memoria
-        UC.Firmware[3] = "00000001000000000000001000000000000"; //IR <- MBR
-        UC.Firmware[4] = "11111111111111111111111111111111111"; //indicador para o ciclo de instrução
-        //Resto
+        //"00000100000100000000100000000000000" //MAR <- PC, ULA <- PC
+        //"00000000000001000000000000000011000" //Memoria <- MAR
+        //"00001000000010000000000000010100101" //PC <- ULA(INC), MBR <- Memoria
+        //"00000001000000000000001000000000000" //IR <- MBR
+        //"11111111111111111111111111111111111" //indicador para o ciclo de instrução
         try { 
             InputStream in = new FileInputStream("src\\main\\java\\cpu\\Firmware.txt");
             Scanner scan = new Scanner(in);
-            int i = 5;
+            int i = 0;
             while(scan.hasNext()) {
                 String s = scan.nextLine().replaceAll(" ","");
+                if (s.equals("0")) s = "00000000000000000000000000000000000";
                 UC.Firmware[i] = s;
+                System.out.println(i + " - " + s);
                 i++;
             } 
         }
@@ -117,7 +118,7 @@ public class Main {
                    }
                 }
                 else {
-                    Scanner scan3 = new Scanner(rs[0]);
+                    Scanner scan3 = new Scanner(rs[1]);
                     if (scan3.hasNextInt()) {
                        certa += "CT";
                        r2 = scan3.nextInt();
@@ -127,12 +128,14 @@ public class Main {
                     }
                 }
                 Memoria.addInitialCode(i,assemblyOpcode.get(certa));
+                System.out.println(i +  " - " + certa);
                 if (r1 != -1) Memoria.addInitialCode(++i, Integer.toBinaryString(r1));
                 if (r2 != -1) Memoria.addInitialCode(++i, Integer.toBinaryString(r2));
             }
             else { //é um opcode com apenas 1 parametro, no caso, jumps
                 certa += " CT";
                 Memoria.addInitialCode(i,assemblyOpcode.get(certa));
+                System.out.println(i +  " - " + certa);
                 Memoria.addInitialCode(++i, Integer.toBinaryString(scan2.nextInt()));
             }
             

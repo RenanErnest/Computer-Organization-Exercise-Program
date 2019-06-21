@@ -515,7 +515,7 @@ public class GUI extends javax.swing.JFrame {
         clock.setText(Integer.toString(Integer.parseInt(clock.getText()) + 1));
         
         //Highlight
-        if(UC.getCBR().equals("1111111111111111111111111111111111")) {
+        if(UC.getCBR().equals("11111111111111111111111111111111111")) {
             highlighter.removeAllHighlights();
             int p1 = p0;
             String x="";
