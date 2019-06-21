@@ -4,10 +4,10 @@ public class DX {
     
     private static String valor = "00000000";
 
-    public  static String getDX(){
+    public  static String get(){
         return valor;
     }
-    public static void setDX(String x){
+    public static void set(String x){
         valor = x;
     }
 }

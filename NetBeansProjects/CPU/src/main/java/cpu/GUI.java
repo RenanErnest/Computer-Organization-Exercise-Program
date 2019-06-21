@@ -497,14 +497,14 @@ public class GUI extends javax.swing.JFrame {
         UC.step();
         
         //Atualização das caixas de texto
-        ax.setText(AX.getAX());
-        bx.setText(BX.getBX());
-        cx.setText(CX.getCX());
-        dx.setText(DX.getDX());
-        pc.setText(PC.getPC());
-        mar.setText(MAR.getMAR());
-        mbr.setText(MBR.getMBR());
-        ir.setText(IR.getIR());
+        ax.setText(AX.get());
+        bx.setText(BX.get());
+        cx.setText(CX.get());
+        dx.setText(DX.get());
+        pc.setText(PC.get());
+        mar.setText(MAR.get());
+        mbr.setText(MBR.get());
+        ir.setText(IR.get());
         zero.setText(UC.getZero() ? "1" : "0");
         sinal.setText(UC.getSinal() ? "1" : "0");
         overflow.setText(UC.getOverflow() ? "1" : "0");

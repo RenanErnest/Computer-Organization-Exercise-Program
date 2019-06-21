@@ -12,14 +12,11 @@ public class ULA {
     public static void setULA(String a){
         ula = a;
     }
-    public  static String getULA(){ //resultado da operação
-        return ula;
-    }
-    public static String getAC(){
+    public static String getAC(){ //resultado da operação
         return ac;
     }
+    
     //codigo de cada operação e também um código que diferencia de acordo com o sinal mandado pela UC
-    //ex: quero multiplicar, UC tem que mandar o sinal MUL e ai a ULA tem que fazer a operação de multiplicação
     public static void operation(int i) {
         if(i>=65 && i<=84) add(); //usa a operação add
         if(i>=85 && i<=104) sub(); // usa a operação sub

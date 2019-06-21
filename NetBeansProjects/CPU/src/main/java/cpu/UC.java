@@ -32,14 +32,72 @@ public class UC {
         CBR = Firmware[Integer.parseInt(CAR,2)];
         CAR = Integer.toBinaryString(Integer.parseInt(CAR,2) + 1); //INC CAR
         if (CBR.equals("0000000000000000000000000000000000")) CAR = "0"; //retorna para o ciclo de busca
-        else if (CBR.equals("1111111111111111111111111111111111")) CAR = IR.getIR(); //OPCODE já é o endereço da Firmware
+        else if (CBR.equals("1111111111111111111111111111111111")) CAR = IR.get(); //OPCODE já é o endereço da Firmware
         else {
-            //for nos barramentos para saber quais portas abrir
+
+            //sinais 1 - 12 saem do barramento interno para os registradores
+            for(int j = 0; j < 12; j++) {
+                if (CBR.charAt(j) == '1') {
+                    switch(j) {
+                        case 0:
+                            AX.set(Barramentos.getInterno());
+                            break;
+                        case 1:
+                            BX.set(Barramentos.getInterno());
+                            break;
+                        //....
+                        
+                    }
+                }
+            }
+            
+            //sinais 17 - 28 entram no barramento interno
+            for(int j = 16; j < 28; j++) {
+                if (CBR.charAt(j) == '1') {
+                    switch(j) {
+                        case 16:
+                            Barramentos.setInterno(AX.get());
+                            break;
+                        case 17:
+                            Barramentos.setInterno(BX.get());
+                            break;
+                        //....
+                        
+                    }
+                }
+            }
+            
+            //sinais 13 - 14 saem do barramento externo
+            for(int j = 12; j < 14; j++) {
+                if (CBR.charAt(j) == '1') {
+                    switch(j) {
+                        case 12:
+                            //...
+                            break;
+                        case 13:
+                            //...
+                            break;
+                    }
+                }
+            }
+            
+            //sinais 29 - 31 entram no barramento
+            for(int j = 28; j < 31; j++) {
+                if (CBR.charAt(j) == '1') {
+                    switch(j) {
+                        case 28:
+                            //...
+                            break;
+                        case 29:
+                            //...
+                            break;
+                        case 30:
+                            //...
+                            break;
+                    }
+                }
+            }
         }
-        //criar um mega array de firmware (Firmware)
-        //cada linha é uma palavra horizontal
-        //Fazer Hashmap(OPCODE,indice) onde o indice é o início das palavras dessa instrução na Firmware
-        //A cada fim das palavras, ou seja, começo de uma nova instrução, o iterador para quando achar um OPCODE específico(vamos usar tudo 0).
         //criar um Hashmap(palavraHorizontal,comentário) onde cada palavra horizontal tem seu literal ex: MAR <- PC
     }
     

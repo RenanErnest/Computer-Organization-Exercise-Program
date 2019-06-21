@@ -14,19 +14,20 @@ public class IR {
         int length = valor.length();
         int i = Integer.parseInt(valor,2);
         
-        if( (i>=185 && i<=191) || (i>=40 && i<=43)) {
+        //Casos de constante
+        if( (i>=701 && i<=713) || (i>=124 && i<=137)) {
             //... pega a ct que esta no endereço PC da memória
             //... e coloca no IRp1
             PC.set(Integer.toBinaryString(Integer.parseInt(PC.get(),2)+1)); //PC++
         }
         
-        if( (i>=181 && i<=184) || (i>=161 && i<=164) || (i>=141 && i<=144) || (i>=121 && i<=124) || (i>=101 && i<=104) || (i>=81 && i<=84) || (i>=44 && i<=47) || (i>=36 && i<=39) || (i>=16 && i<=19)) {
+        if( (i>=685 && i<=697) || (i>=609 && i<=621) || (i>=533 && i<=545) || (i>=457 && i<=469) || (i>=381 && i<=393) || (i>=305 && i<=317) || (i>=141 && i<=155) || (i>=109 && i<=121) || (i>=37 && i<=43)) {
             //... pega a ct que esta no endereço PC da memória
             //... e coloca no IRp2
             PC.set(Integer.toBinaryString(Integer.parseInt(PC.get(),2)+1)); //PC++
         }
         
-        if(i == 64) { //MOV [CT],CT
+        if(i == 240) { //MOV [CT],CT
             //... pega a ct que esta no endereço PC da memória
             //... e coloca no IRp1
             PC.set(Integer.toBinaryString(Integer.parseInt(PC.get(),2)+1)); //PC++

@@ -12,6 +12,7 @@ public class Main {
     
     //Mapa
     public static Map<String,String> assemblyOpcode = new HashMap<String,String>();
+    //public static Map<Integer,Object> registrador = new HashMap<Integer,Object>();
     
     //Codigo em assembly colocado no programa
     public static String Code; //apresentado na interface grafica
@@ -66,8 +67,31 @@ public class Main {
             e.printStackTrace();
         }
 
+        /*registrador.put(1, new AX());
+        registrador.put(2, new BX());
+        registrador.put(3, new CX());
+        registrador.put(4, new DX());
+        registrador.put(5, new PC());
+        registrador.put(6, new MAR());
+        registrador.put(7, new MBR());
+        registrador.put(8, new IR());
+        registrador.put(9, new IR());
+        registrador.put(10, new IR());
+        registrador.put(11, new ULA());
+        registrador.put(12, new ULA());
         
+        registrador.put(17, new AX());
+        registrador.put(18, new BX());
+        registrador.put(19, new CX());
+        registrador.put(20, new DX());
+        registrador.put(21, new PC());
+        registrador.put(23, new MBR);
+        registrador.put(25, new IR());
+        registrador.put(26, new IR());
+        registrador.put(28, new ULA());*/
+
         //Pegar entrada do professor e transformar em OPCODE  e guardar na memória
         
     }
+
 }
