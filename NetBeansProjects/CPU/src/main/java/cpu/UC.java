@@ -45,8 +45,36 @@ public class UC {
                         case 1:
                             BX.set(Barramentos.getInterno());
                             break;
-                        //....
-                        
+                        case 2:
+                            CX.set(Barramentos.getInterno());
+                            break;
+                        case 3:
+                            DX.set(Barramentos.getInterno());
+                            break;
+                        case 4:
+                            PC.set(Barramentos.getInterno());
+                            break;
+                        case 5:
+                            MAR.set(Barramentos.getInterno());
+                            break;
+                        case 6:
+                            MBR.set(Barramentos.getInterno());
+                            break;
+                        case 7:
+                            IR.set(Barramentos.getInterno());
+                            break;
+                        case 8:
+                            IR.set(Barramentos.getInterno());
+                            break;
+                        case 9:
+                            IR.set(Barramentos.getInterno());
+                            break;
+                        case 10:
+                            ULA.setX(Barramentos.getInterno());
+                            break;
+                        case 11:
+                            ULA.setULA(Barramentos.getInterno());
+                            break;
                     }
                 }
             }
@@ -61,8 +89,27 @@ public class UC {
                         case 17:
                             Barramentos.setInterno(BX.get());
                             break;
-                        //....
-                        
+                        case 18:
+                            Barramentos.setInterno(CX.get());
+                            break;
+                        case 19:
+                            Barramentos.setInterno(DX.get());
+                            break;
+                        case 20:
+                            Barramentos.setInterno(PC.get());
+                            break; 
+                        case 22:
+                            Barramentos.setInterno(MBR.get());
+                            break;
+                        case 24:
+                            Barramentos.setInterno(IR.get());
+                            break;
+                        case 25:
+                            Barramentos.setInterno(IR.get());
+                            break;
+                        case 27:
+                            Barramentos.setInterno(AC.get());
+                            break;    
                     }
                 }
             }
@@ -71,11 +118,11 @@ public class UC {
             for(int j = 12; j < 14; j++) {
                 if (CBR.charAt(j) == '1') {
                     switch(j) {
-                        case 12:
-                            //...
-                            break;
                         case 13:
-                            //...
+                            MBR.set(Barramentos.getExterno());
+                            break;
+                        case 14:
+                            Memoria.set(Barramentos.getExterno());
                             break;
                     }
                 }
@@ -86,13 +133,13 @@ public class UC {
                 if (CBR.charAt(j) == '1') {
                     switch(j) {
                         case 28:
-                            //...
+                            Barramentos.setInterno(MBR.get());
                             break;
                         case 29:
-                            //...
+                            Barramentos.setInterno(Memoria.get());
                             break;
                         case 30:
-                            //...
+                            Barramentos.setInterno(MAR.get());
                             break;
                     }
                 }
