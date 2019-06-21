@@ -31,8 +31,8 @@ public class UC {
         
         CBR = Firmware[Integer.parseInt(CAR,2)];
         CAR = Integer.toBinaryString(Integer.parseInt(CAR,2) + 1); //INC CAR
-        if (CBR.equals("0000000000000000000000000000000000")) CAR = "0"; //retorna para o ciclo de busca
-        else if (CBR.equals("1111111111111111111111111111111111")) CAR = IR.get(); //OPCODE já é o endereço da Firmware
+        if (CBR.equals("00000000000000000000000000000000000")) CAR = "0"; //retorna para o ciclo de busca
+        else if (CBR.equals("11111111111111111111111111111111111")) CAR = IR.get(); //OPCODE já é o endereço da Firmware
         else {
 
             //sinais 1 - 12 saem do barramento interno para os registradores
@@ -64,10 +64,10 @@ public class UC {
                             IR.set(Barramentos.getInterno());
                             break;
                         case 8:
-                            IR.set(Barramentos.getInterno());
+                            IR.setP2(Barramentos.getInterno());
                             break;
                         case 9:
-                            IR.set(Barramentos.getInterno());
+                            IR.setP1(Barramentos.getInterno());
                             break;
                         case 10:
                             ULA.setX(Barramentos.getInterno());
@@ -102,10 +102,10 @@ public class UC {
                             Barramentos.setInterno(MBR.get());
                             break;
                         case 24:
-                            Barramentos.setInterno(IR.get());
+                            Barramentos.setInterno(IR.getP2());
                             break;
                         case 25:
-                            Barramentos.setInterno(IR.get());
+                            Barramentos.setInterno(IR.getP1());
                             break;
                         case 27:
                             Barramentos.setInterno(AC.get());
@@ -118,11 +118,12 @@ public class UC {
             for(int j = 12; j < 14; j++) {
                 if (CBR.charAt(j) == '1') {
                     switch(j) {
-                        case 13:
+                        case 12:
                             MBR.set(Barramentos.getExterno());
                             break;
-                        case 14:
-                            Memoria.set(Barramentos.getExterno());
+                        case 13:
+                            if (CBR.charAt(31) == '1') Memoria.setEndereco(Barramentos.getExterno());
+                            else Memoria.setBuffer(Barramentos.getExterno());
                             break;
                     }
                 }
@@ -136,7 +137,7 @@ public class UC {
                             Barramentos.setInterno(MBR.get());
                             break;
                         case 29:
-                            Barramentos.setInterno(Memoria.get());
+                            Barramentos.setInterno(Memoria.getBuffer());
                             break;
                         case 30:
                             Barramentos.setInterno(MAR.get());
@@ -155,8 +156,8 @@ public class UC {
                 Memoria.operation();
             }
             if (CBR.charAt(33) == '1') {
-                Memoria.operation();
                 Memoria.setWrite("1");
+                Memoria.operation();
             }
             
             //Sinais para a ULA

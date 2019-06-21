@@ -14,7 +14,7 @@ public class Main {
     public static Map<String,String> assemblyOpcode = new HashMap<String,String>();
     
     //Codigo em assembly colocado no programa
-    public static String Code; //apresentado na interface grafica
+    public static String Code = ""; //apresentado na interface grafica
     
     public static void program() {
         //primeiro código chamado ao iniciar o programa

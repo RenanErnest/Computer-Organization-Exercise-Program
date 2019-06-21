@@ -108,8 +108,8 @@ public class GUI_Inicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        GUI.main(new String[1]);
         Main.Code = codigo.getText();
+        GUI.main(new String[1]);
         this.dispose();
     }//GEN-LAST:event_enviarActionPerformed
 
