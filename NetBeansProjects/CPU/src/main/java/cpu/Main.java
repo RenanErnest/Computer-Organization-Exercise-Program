@@ -58,7 +58,6 @@ public class Main {
                 String s = scan.nextLine().replaceAll(" ","");
                 if (s.equals("0")) s = "00000000000000000000000000000000000";
                 UC.Firmware[i] = s;
-                System.out.println(i + " - " + s);
                 i++;
             } 
         }
@@ -83,8 +82,12 @@ public class Main {
                 String rs[] = r.split(",");
                 
                 if (rs[0].contains("[")) {
-                   rs[0] = rs[0].replaceAll("[","");
-                   rs[0] = rs[0].replaceAll("]","");
+                   char[] rsc = rs[0].toCharArray();
+                   char[] novo_rsc = new char[rs[0].length() - 2];
+                   for(int q = 0; q < novo_rsc.length; q++) { //removendo colchetes
+                       novo_rsc[q] = rsc[q+1];
+                   }
+                   rs[0] = new String(novo_rsc);
                    Scanner scan3 = new Scanner(rs[0]);
                    if (scan3.hasNextInt()) {
                        certa += " [CT],";
@@ -106,8 +109,12 @@ public class Main {
                 }
                 
                 if (rs[1].contains("[")) {
-                   rs[1] = rs[1].replaceAll("[","");
-                   rs[1] = rs[1].replaceAll("]","");
+                   char[] rsc = rs[1].toCharArray();
+                   char[] novo_rsc = new char[rs[1].length() - 2];
+                   for(int q = 0; q < novo_rsc.length; q++) { //removendo colchetes
+                       novo_rsc[q] = rsc[q+1];
+                   }
+                   rs[1] = new String(novo_rsc);
                    Scanner scan3 = new Scanner(rs[1]);
                    if (scan3.hasNextInt()) {
                        certa += "[CT]";
@@ -128,14 +135,12 @@ public class Main {
                     }
                 }
                 Memoria.addInitialCode(i,assemblyOpcode.get(certa));
-                System.out.println(i +  " - " + certa);
                 if (r1 != -1) Memoria.addInitialCode(++i, Integer.toBinaryString(r1));
                 if (r2 != -1) Memoria.addInitialCode(++i, Integer.toBinaryString(r2));
             }
             else { //é um opcode com apenas 1 parametro, no caso, jumps
                 certa += " CT";
                 Memoria.addInitialCode(i,assemblyOpcode.get(certa));
-                System.out.println(i +  " - " + certa);
                 Memoria.addInitialCode(++i, Integer.toBinaryString(scan2.nextInt()));
             }
             
@@ -147,7 +152,7 @@ public class Main {
     public static String normaliza(String x) {
         int length = x.length();
         if (length < 16) x = String.format("%16s", x).replace(' ', '0');
-        else if (length > 16){
+        else if (length == 32){
             char[] xc = x.toCharArray();
             char[] normalizado = new char[16];
             int diff = length - 16;
@@ -159,9 +164,16 @@ public class Main {
 }
 /* Teste
 MOV BX,10
-MOV AX,29
+ADD AX,29
 MOV CX,AX
 ADD CX,BX
 MUL CX,BX
 SUB DX,AX
+CMP AX,BX
+MOV AX,10
+CMP AX,BX
+MOV [100],AX
+MOV AX,AX
+MOV CX,[100]
+SUB AX,40
 */

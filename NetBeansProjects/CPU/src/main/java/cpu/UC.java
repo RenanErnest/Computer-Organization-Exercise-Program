@@ -49,10 +49,6 @@ public class UC {
                 Memoria.setRead("1");
                 Memoria.operation();
             }
-            if (CBR.charAt(33) == '1') {
-                Memoria.setWrite("1");
-                Memoria.operation();
-            }
             
             /*------------------------ Entradas dos registradores para os barramentos ----------------------*/
             //sinais 17 - 28 entram no barramento interno
@@ -169,6 +165,11 @@ public class UC {
             }
             /*--------------------------------------------------------------------*/
             
+            //Sinais Memória
+            if (CBR.charAt(33) == '1') {
+                Memoria.setWrite("1");
+                Memoria.operation();
+            }
         }
     }
     

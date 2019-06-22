@@ -7,6 +7,7 @@ package cpu;
 
 import java.awt.Color;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 
@@ -532,7 +533,12 @@ public class GUI extends javax.swing.JFrame {
         }
         if(UC.getCBR().equals("00000000000000000000000000000000000")) {
             highlighter.removeAllHighlights();
-            if(ultimaInstrucao) Step.setEnabled(false);
+            //if(ultimaInstrucao) Step.setEnabled(false);
+        }
+        
+        if(UC.getOverflow()) {
+            JOptionPane.showMessageDialog(null, "Overflow!", "Erro", JOptionPane.ERROR_MESSAGE);
+            Step.setEnabled(false);
         }
     }//GEN-LAST:event_StepActionPerformed
 

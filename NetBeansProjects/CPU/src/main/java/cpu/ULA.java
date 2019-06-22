@@ -42,8 +42,8 @@ public class ULA {
         else UC.setSinal(false);
         
         // atualizando flag OVERFLOW
-        if(ac.length() > 16) UC.setSinal(true);
-        else UC.setSinal(false);
+        if(ac.length() > 16) UC.setOverflow(true);
+        else UC.setOverflow(false);
     }
     
     public static void add() {
@@ -73,18 +73,19 @@ public class ULA {
 
     private static void cmp() {
         String aux = Integer.toBinaryString(Integer.parseInt(x,2) - Integer.parseInt(ula,2));
+        aux = Main.normaliza(aux);
         
         // atualizando flag ZERO
         if(Integer.parseInt(aux,2) == 0) UC.setZero(true);
         else UC.setZero(false);
         
         // atualizando flag SINAL
-        if(Integer.parseInt(aux,2) > 0) UC.setSinal(true);
+        if(Integer.parseInt(aux,2) >= 0) UC.setSinal(true);
         else UC.setSinal(false);
         
         // atualizando flag OVERFLOW
-        if(aux.length() > 16) UC.setSinal(true);
-        else UC.setSinal(false);
+        if(aux.length() > 16) UC.setOverflow(true);
+        else UC.setOverflow(false);
     }
 
 
