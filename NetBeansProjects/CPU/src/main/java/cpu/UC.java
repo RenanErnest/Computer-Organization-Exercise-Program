@@ -34,7 +34,81 @@ public class UC {
         if (CBR.equals("00000000000000000000000000000000000")) CAR = "0"; //retorna para o ciclo de busca
         else if (CBR.equals("11111111111111111111111111111111111")) CAR = IR.get(); //OPCODE já é o endereço da Firmware
         else {
-
+            
+            //porta de saida do PC
+            if (CBR.charAt(20) == '1') ULA.setX(Integer.toBinaryString(1)); //pra dar INC
+            
+            //Sinais para a ULA
+            if (CBR.charAt(34) == '1') {
+                ULA.operation(Integer.parseInt(CAR,2) - 1);
+            }
+            
+            //Sinais para a Memoria
+            if (CBR.charAt(31) == '1') Memoria.setAddressValid("1");
+            if (CBR.charAt(32) == '1') {
+                Memoria.setRead("1");
+                Memoria.operation();
+            }
+            if (CBR.charAt(33) == '1') {
+                Memoria.setWrite("1");
+                Memoria.operation();
+            }
+            
+            /*------------------------ Entradas dos registradores para os barramentos ----------------------*/
+            //sinais 17 - 28 entram no barramento interno
+            for(int j = 16; j < 28; j++) {
+                if (CBR.charAt(j) == '1') {
+                    switch(j) {
+                        case 16:
+                            Barramentos.setInterno(AX.get());
+                            break;
+                        case 17:
+                            Barramentos.setInterno(BX.get());
+                            break;
+                        case 18:
+                            Barramentos.setInterno(CX.get());
+                            break;
+                        case 19:
+                            Barramentos.setInterno(DX.get());
+                            break;
+                        case 20:
+                            Barramentos.setInterno(PC.get());
+                            break; 
+                        case 22:
+                            Barramentos.setInterno(MBR.get());
+                            break;
+                        case 24:
+                            Barramentos.setInterno(IR.getP2());
+                            break;
+                        case 25:
+                            Barramentos.setInterno(IR.getP1());
+                            break;
+                        case 27:
+                            Barramentos.setInterno(ULA.getAC());
+                            break;    
+                    }
+                }
+            }
+            
+            //sinais 29 - 31 entram no barramento externo
+            for(int j = 28; j < 31; j++) {
+                if (CBR.charAt(j) == '1') {
+                    switch(j) {
+                        case 28:
+                            Barramentos.setExterno(MBR.get());
+                            break;
+                        case 29:
+                            Barramentos.setExterno(Memoria.getBuffer());
+                            break;
+                        case 30:
+                            Barramentos.setExterno(MAR.get());
+                            break;
+                    }
+                }
+            }
+            /*-----------------------------------------------------------------------------*/
+            
+            /*---------------------- Saidas dos barramentos para os registradores ------------------*/
             //sinais 1 - 12 saem do barramento interno para os registradores
             for(int j = 0; j < 12; j++) {
                 if (CBR.charAt(j) == '1') {
@@ -78,42 +152,7 @@ public class UC {
                     }
                 }
             }
-            
-            //sinais 17 - 28 entram no barramento interno
-            for(int j = 16; j < 28; j++) {
-                if (CBR.charAt(j) == '1') {
-                    switch(j) {
-                        case 16:
-                            Barramentos.setInterno(AX.get());
-                            break;
-                        case 17:
-                            Barramentos.setInterno(BX.get());
-                            break;
-                        case 18:
-                            Barramentos.setInterno(CX.get());
-                            break;
-                        case 19:
-                            Barramentos.setInterno(DX.get());
-                            break;
-                        case 20:
-                            Barramentos.setInterno(PC.get());
-                            break; 
-                        case 22:
-                            Barramentos.setInterno(MBR.get());
-                            break;
-                        case 24:
-                            Barramentos.setInterno(IR.getP2());
-                            break;
-                        case 25:
-                            Barramentos.setInterno(IR.getP1());
-                            break;
-                        case 27:
-                            Barramentos.setInterno(ULA.getAC());
-                            break;    
-                    }
-                }
-            }
-            
+
             //sinais 13 - 14 saem do barramento externo
             for(int j = 12; j < 14; j++) {
                 if (CBR.charAt(j) == '1') {
@@ -128,42 +167,8 @@ public class UC {
                     }
                 }
             }
+            /*--------------------------------------------------------------------*/
             
-            //sinais 29 - 31 entram no barramento
-            for(int j = 28; j < 31; j++) {
-                if (CBR.charAt(j) == '1') {
-                    switch(j) {
-                        case 28:
-                            Barramentos.setInterno(MBR.get());
-                            break;
-                        case 29:
-                            Barramentos.setInterno(Memoria.getBuffer());
-                            break;
-                        case 30:
-                            Barramentos.setInterno(MAR.get());
-                            break;
-                    }
-                }
-            }
-            
-            //porta de saida do PC
-            if (CBR.charAt(20) == '1') ULA.setX(Integer.toBinaryString(1)); //pra dar INC
-            
-            //Sinais para a Memoria
-            if (CBR.charAt(31) == '1') Memoria.setAddressValid("1");
-            if (CBR.charAt(32) == '1') {
-                Memoria.setRead("1");
-                Memoria.operation();
-            }
-            if (CBR.charAt(33) == '1') {
-                Memoria.setWrite("1");
-                Memoria.operation();
-            }
-            
-            //Sinais para a ULA
-            if (CBR.charAt(34) == '1') {
-                ULA.operation(Integer.parseInt(CAR,2) - 1);
-            }
         }
     }
     

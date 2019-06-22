@@ -1,0 +1,3 @@
+- Pela falta do comando INC, no caso de uma palavra que manda o PC para a ULA, também é enviado o valor 1 para o outro registrador da ULA, fazendo a UC então mandar um ADD para a ULA
+- IR e Memoria tem meios especiais para lidar com as constantes guardadas em memória para que elas não afetem o funcionamento do ciclo de busca da UC
+- Se flag de sinal é true o número é positivo, se false o número é negativo, 0 está sendo tratado como positivo

@@ -143,5 +143,25 @@ public class Main {
         }
         //criar um Hashmap(palavraHorizontal,comentário) onde cada palavra horizontal tem seu literal ex: MAR <- PC
     }
-
+    
+    public static String normaliza(String x) {
+        int length = x.length();
+        if (length < 16) x = String.format("%16s", x).replace(' ', '0');
+        else if (length > 16){
+            char[] xc = x.toCharArray();
+            char[] normalizado = new char[16];
+            int diff = length - 16;
+            for(int i = length-1; i >= diff; i--) normalizado[i-diff] = xc[i];
+            x = new String(normalizado);
+        }
+        return x;
+    }
 }
+/* Teste
+MOV BX,10
+MOV AX,29
+MOV CX,AX
+ADD CX,BX
+MUL CX,BX
+SUB DX,AX
+*/

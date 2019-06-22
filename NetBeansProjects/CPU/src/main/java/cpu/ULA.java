@@ -2,18 +2,24 @@ package cpu;
 
 public class ULA {
     
-    private static String x; //variável para reservar o segundo parametro
-    private static String ula;
-    private static String ac;
+    private static String x = "0000000000000000"; //variável para reservar o outro parametro
+    private static String ula = "0000000000000000";
+    private static String ac = "0000000000000000";
     
     public static void setX(String a){
+        a = Main.normaliza(a); //normaliza o valor para 16 bits
         x = a;
     }
     public static void setULA(String a){
+        a = Main.normaliza(a); //normaliza o valor para 16 bits
         ula = a;
     }
     public static String getAC(){ //resultado da operação
         return ac;
+    }
+    public static void setAC(String a) {
+        a = Main.normaliza(a); //normaliza o valor para 16 bits
+        ac = a;
     }
     
     //codigo de cada operação e também um código que diferencia de acordo com o sinal mandado pela UC
@@ -32,7 +38,7 @@ public class ULA {
         else UC.setZero(false);
         
         // atualizando flag SINAL
-        if(Integer.parseInt(ac,2) > 0) UC.setSinal(true);
+        if(Integer.parseInt(ac,2) >= 0) UC.setSinal(true);
         else UC.setSinal(false);
         
         // atualizando flag OVERFLOW
@@ -41,27 +47,27 @@ public class ULA {
     }
     
     public static void add() {
-        ac = Integer.toBinaryString(Integer.parseInt(x,2) + Integer.parseInt(ula,2));
+        ULA.setAC(Integer.toBinaryString(Integer.parseInt(x,2) + Integer.parseInt(ula,2)));
         atualizaFlag();
     }
 
     private static void sub() {
-        ac = Integer.toBinaryString(Integer.parseInt(x,2) - Integer.parseInt(ula,2));
+        ULA.setAC(Integer.toBinaryString(Integer.parseInt(x,2) - Integer.parseInt(ula,2)));
         atualizaFlag();
     }
 
     private static void mul() {
-        ac = Integer.toBinaryString(Integer.parseInt(x,2) * Integer.parseInt(ula,2));
+        ULA.setAC(Integer.toBinaryString(Integer.parseInt(x,2) * Integer.parseInt(ula,2)));
         atualizaFlag();
     }
 
     private static void div() {
-        ac = Integer.toBinaryString(Integer.parseInt(x,2) / Integer.parseInt(ula,2));
+        ULA.setAC(Integer.toBinaryString(Integer.parseInt(x,2) / Integer.parseInt(ula,2)));
         atualizaFlag();
     }
 
     private static void mod() {
-        ac = Integer.toBinaryString(Integer.parseInt(x,2) % Integer.parseInt(ula,2));
+        ULA.setAC(Integer.toBinaryString(Integer.parseInt(x,2) % Integer.parseInt(ula,2)));
         atualizaFlag();
     }
 

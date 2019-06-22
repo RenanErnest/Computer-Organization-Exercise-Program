@@ -24,6 +24,9 @@ public class GUI extends javax.swing.JFrame {
     String codigo;
     Scanner scan;
     
+    //fim do programa
+    boolean ultimaInstrucao = false;
+    
     /**
      * Creates new form GUI
      */
@@ -521,10 +524,15 @@ public class GUI extends javax.swing.JFrame {
             String x="";
             if (scan.hasNextLine()) {
                 x = scan.nextLine();
+                if (!scan.hasNextLine()) ultimaInstrucao = true;
                 p1 += x.length()+1;
             }
             try { if(!x.equals("")) highlighter.addHighlight(p0, p1, painter); } catch(Exception e){}
             p0 = p1;
+        }
+        if(UC.getCBR().equals("00000000000000000000000000000000000")) {
+            highlighter.removeAllHighlights();
+            if(ultimaInstrucao) Step.setEnabled(false);
         }
     }//GEN-LAST:event_StepActionPerformed
 
