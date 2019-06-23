@@ -6,7 +6,7 @@
 package cpu;
 
 import java.awt.Color;
-import java.util.Scanner;
+import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
@@ -21,9 +21,6 @@ public class GUI extends javax.swing.JFrame {
     //Highlight
     Highlighter highlighter;
     Highlighter.HighlightPainter painter;
-    int p0 = 0;
-    String codigo;
-    Scanner scan;
     
     //fim do programa
     boolean ultimaInstrucao = false;
@@ -38,8 +35,6 @@ public class GUI extends javax.swing.JFrame {
         //Highlight
         this.highlighter = CodigoText.getHighlighter();
         this.painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
-        codigo = CodigoText.getText();
-        scan = new Scanner(codigo);
     }
     
     /**
@@ -501,40 +496,46 @@ public class GUI extends javax.swing.JFrame {
         UC.step();
         
         //Atualização das caixas de texto
-        ax.setText(AX.get());
-        bx.setText(BX.get());
-        cx.setText(CX.get());
-        dx.setText(DX.get());
-        pc.setText(PC.get());
-        mar.setText(MAR.get());
-        mbr.setText(MBR.get());
-        ir.setText(IR.get());
+        ax.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(AX.get(),2))).replace(' ', '0'));
+        bx.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(BX.get(),2))).replace(' ', '0'));
+        cx.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(CX.get(),2))).replace(' ', '0'));
+        dx.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(DX.get(),2))).replace(' ', '0'));
+        pc.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(PC.get(),2))).replace(' ', '0'));
+        mar.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(MAR.get(),2))).replace(' ', '0'));
+        mbr.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(MBR.get(),2))).replace(' ', '0'));
+        ir.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(IR.get(),2))).replace(' ', '0'));
         zero.setText(UC.getZero() ? "1" : "0");
         sinal.setText(UC.getSinal() ? "1" : "0");
         overflow.setText(UC.getOverflow() ? "1" : "0");
-        barramentoInterno.setText(Barramentos.getInterno());
-        barramentoExterno.setText(Barramentos.getExterno());
-        palavra.setText(UC.getCBR());
+        barramentoInterno.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(Barramentos.getInterno(),2))).replace(' ', '0'));
+        barramentoExterno.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(Barramentos.getExterno(),2))).replace(' ', '0'));
+        palavra.setText(UC.getCBR().equals("0") ? "00000000000000000000000000000000000" : UC.getCBR());
         descricao.setText(UC.instrucaoDescricao.get(UC.getCBR()));
         clock.setText(Integer.toString(Integer.parseInt(clock.getText()) + 1));
         
         //Highlight
         if(UC.getCBR().equals("11111111111111111111111111111111111")) {
             highlighter.removeAllHighlights();
-            int p1 = p0;
-            String x="";
-            if (scan.hasNextLine()) {
-                x = scan.nextLine();
-                if (!scan.hasNextLine()) ultimaInstrucao = true;
-                p1 += x.length()+1;
+            int p0 = 0; //começo do highlight
+            int p1 = 0; //fim do highlight
+            Scanner scan = new Scanner(Main.opcodeInMemory);
+            while(scan.hasNextLine()) {
+                String s = scan.nextLine();
+                if(Main.assemblyOpcode.get(s).equals(IR.get())) {
+                    p0 = Main.opcodeInMemory.indexOf(s); //Pega o primeiro que bater a string
+                    String aux = Main.Code.substring(p0);
+                    Scanner scan2 = new Scanner(aux);
+                    String aux2 = scan2.nextLine();
+                    p1 = p0 + aux2.length();
+                }
             }
-            try { if(!x.equals("")) highlighter.addHighlight(p0, p1, painter); } catch(Exception e){}
-            p0 = p1;
+            try { highlighter.addHighlight(p0, p1, painter); } catch(Exception e){}
         }
-        if(UC.getCBR().equals("00000000000000000000000000000000000")) {
+        if (Integer.parseInt(UC.getCAR(),2) == 0) { //novo ciclo de busca
             highlighter.removeAllHighlights();
             //if(ultimaInstrucao) Step.setEnabled(false);
         }
+        //System.out.println(Main.opcodeInMemory);
         
         if(UC.getOverflow()) {
             JOptionPane.showMessageDialog(null, "Overflow!", "Erro", JOptionPane.ERROR_MESSAGE);

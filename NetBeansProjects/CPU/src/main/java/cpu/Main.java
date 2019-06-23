@@ -10,11 +10,12 @@ import java.util.Scanner;
 
 public class Main {
     
-    //Mapa
+    //Mapa <assemblyCode><OPCODE>
     public static Map<String,String> assemblyOpcode = new HashMap<String,String>();
     
     //Codigo em assembly colocado no programa
     public static String Code = ""; //apresentado na interface grafica
+    public static String opcodeInMemory = "";
     
     public static void program() {
         //primeiro código chamado ao iniciar o programa
@@ -56,7 +57,7 @@ public class Main {
             int i = 0;
             while(scan.hasNext()) {
                 String s = scan.nextLine().replaceAll(" ","");
-                if (s.equals("0")) s = "00000000000000000000000000000000000";
+                //if (s.equals("0")) s = "00000000000000000000000000000000000";
                 UC.Firmware[i] = s;
                 i++;
             } 
@@ -135,12 +136,14 @@ public class Main {
                     }
                 }
                 Memoria.addInitialCode(i,assemblyOpcode.get(certa));
+                opcodeInMemory += certa + "\n";
                 if (r1 != -1) Memoria.addInitialCode(++i, Integer.toBinaryString(r1));
                 if (r2 != -1) Memoria.addInitialCode(++i, Integer.toBinaryString(r2));
             }
             else { //é um opcode com apenas 1 parametro, no caso, jumps
                 certa += " CT";
                 Memoria.addInitialCode(i,assemblyOpcode.get(certa));
+                opcodeInMemory += certa + "\n";
                 Memoria.addInitialCode(++i, Integer.toBinaryString(scan2.nextInt()));
             }
             
@@ -161,6 +164,7 @@ public class Main {
         }
         return x;
     }
+
 }
 /* Teste
 MOV BX,10

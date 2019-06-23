@@ -31,7 +31,7 @@ public class UC {
         
         CBR = Firmware[Integer.parseInt(CAR,2)];
         CAR = Integer.toBinaryString(Integer.parseInt(CAR,2) + 1); //INC CAR
-        if (CBR.equals("00000000000000000000000000000000000")) CAR = "0"; //retorna para o ciclo de busca
+        if (CBR.equals("0")) CAR = "0"; //retorna para o ciclo de busca
         else if (CBR.equals("11111111111111111111111111111111111")) CAR = IR.get(); //OPCODE já é o endereço da Firmware
         else {
             
