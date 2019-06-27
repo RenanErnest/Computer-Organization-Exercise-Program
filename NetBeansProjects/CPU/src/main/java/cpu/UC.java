@@ -50,6 +50,9 @@ public class UC {
                 Memoria.operation();
             }
             
+            String descricao = "";
+            String descricao2 = "";
+            
             /*------------------------ Entradas dos registradores para os barramentos ----------------------*/
             //sinais 17 - 28 entram no barramento interno
             for(int j = 16; j < 28; j++) {
@@ -57,6 +60,7 @@ public class UC {
                     switch(j) {
                         case 16:
                             Barramentos.setInterno(AX.get());
+                            descricao += " <- AX";
                             break;
                         case 17:
                             Barramentos.setInterno(BX.get());
@@ -92,6 +96,7 @@ public class UC {
                     switch(j) {
                         case 28:
                             Barramentos.setExterno(MBR.get());
+                            descricao2 += " <- MBR";
                             break;
                         case 29:
                             Barramentos.setExterno(Memoria.getBuffer());
@@ -104,6 +109,9 @@ public class UC {
             }
             /*-----------------------------------------------------------------------------*/
             
+            String final1 = descricao;
+            String final2 = descricao2;
+            
             /*---------------------- Saidas dos barramentos para os registradores ------------------*/
             //sinais 1 - 12 saem do barramento interno para os registradores
             for(int j = 0; j < 12; j++) {
@@ -111,6 +119,10 @@ public class UC {
                     switch(j) {
                         case 0:
                             AX.set(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "AX" + final1;
+                            }
+                            else descricao = "AX" + final1;
                             break;
                         case 1:
                             BX.set(Barramentos.getInterno());
@@ -155,10 +167,18 @@ public class UC {
                     switch(j) {
                         case 12:
                             MBR.set(Barramentos.getExterno());
+                            if(descricao2.charAt(0) != ' ') {
+                                descricao2 += "\n" + "MBR" + final2;
+                            }
+                            else descricao2 = "MBR" + final2;
                             break;
                         case 13:
                             if (CBR.charAt(31) == '1') Memoria.setEndereco(Barramentos.getExterno());
                             else Memoria.setBuffer(Barramentos.getExterno());
+                            if(descricao2.charAt(0) != ' ') {
+                                descricao2 += "\n" + "MEMORIA" + final2;
+                            }
+                            else descricao2 = "MEMORIA" + final2;
                             break;
                     }
                 }
@@ -170,6 +190,8 @@ public class UC {
                 Memoria.setWrite("1");
                 Memoria.operation();
             }
+            
+            Main.description = !descricao.equals("") ? descricao + "\n" + descricao2 : descricao2;
         }
     }
     

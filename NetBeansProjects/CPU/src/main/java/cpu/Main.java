@@ -16,6 +16,7 @@ public class Main {
     //Codigo em assembly colocado no programa
     public static String Code = ""; //apresentado na interface grafica
     public static String opcodeInMemory = "";
+    public static String description = "";
     
     public static void program() {
         //primeiro código chamado ao iniciar o programa
