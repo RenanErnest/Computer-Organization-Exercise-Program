@@ -23,8 +23,8 @@ public class Main {
         
         //Map assembly -> OPCODE
         try {
-            InputStream inA = new FileInputStream("src\\main\\java\\cpu\\ComandosAssembly.txt");
-            InputStream inO = new FileInputStream("src\\main\\java\\cpu\\OPCODES.txt");
+            InputStream inA = new FileInputStream("src\\main\\java\\cpu\\txt\\ComandosAssembly.txt");
+            InputStream inO = new FileInputStream("src\\main\\java\\cpu\\txt\\OPCODES.txt");
             Scanner scanA = new Scanner(inA);
             Scanner scanO = new Scanner(inO);
             int i = 0;
@@ -53,7 +53,7 @@ public class Main {
         //"00000001000000000000001000000000000" //IR <- MBR
         //"11111111111111111111111111111111111" //indicador para o ciclo de instrução
         try { 
-            InputStream in = new FileInputStream("src\\main\\java\\cpu\\Firmware.txt");
+            InputStream in = new FileInputStream("src\\main\\java\\cpu\\txt\\Firmware.txt");
             Scanner scan = new Scanner(in);
             int i = 0;
             while(scan.hasNext()) {
