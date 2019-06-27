@@ -510,7 +510,7 @@ public class GUI extends javax.swing.JFrame {
         barramentoInterno.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(Barramentos.getInterno(),2))).replace(' ', '0'));
         barramentoExterno.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(Barramentos.getExterno(),2))).replace(' ', '0'));
         palavra.setText(UC.getCBR().equals("0") ? "00000000000000000000000000000000000" : UC.getCBR());
-        descricao.setText(UC.instrucaoDescricao.get(UC.getCBR()));
+        descricao.setText(Main.description);
         clock.setText(Integer.toString(Integer.parseInt(clock.getText()) + 1));
         
         //Highlight
@@ -540,6 +540,11 @@ public class GUI extends javax.swing.JFrame {
         if(UC.getOverflow()) {
             JOptionPane.showMessageDialog(null, "Overflow!", "Erro", JOptionPane.ERROR_MESSAGE);
             Step.setEnabled(false);
+        }
+        
+        if (UC.getCBR().equals("00000000000000000000000000000000000")) {
+            String conteudo = Memoria.getConstante(Integer.parseInt(PC.get(),2));
+            if (conteudo == null) Step.setEnabled(false);
         }
     }//GEN-LAST:event_StepActionPerformed
 
