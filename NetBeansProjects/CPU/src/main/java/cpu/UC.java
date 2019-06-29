@@ -64,27 +64,35 @@ public class UC {
                             break;
                         case 17:
                             Barramentos.setInterno(BX.get());
+                            descricao += " <- BX";
                             break;
                         case 18:
                             Barramentos.setInterno(CX.get());
+                            descricao += " <- CX";
                             break;
                         case 19:
                             Barramentos.setInterno(DX.get());
+                            descricao += " <- DX";
                             break;
                         case 20:
                             Barramentos.setInterno(PC.get());
+                            descricao += " <- PC";
                             break; 
                         case 22:
                             Barramentos.setInterno(MBR.get());
+                            descricao += " <- MBR";
                             break;
                         case 24:
                             Barramentos.setInterno(IR.getP2());
+                            descricao += " <- IR-P2";
                             break;
                         case 25:
                             Barramentos.setInterno(IR.getP1());
+                            descricao += " <- IR-P1";
                             break;
                         case 27:
                             Barramentos.setInterno(ULA.getAC());
+                            descricao += " <- ULA";
                             break;    
                     }
                 }
@@ -100,9 +108,11 @@ public class UC {
                             break;
                         case 29:
                             Barramentos.setExterno(Memoria.getBuffer());
+                            descricao2 += " <- MERMORIA";
                             break;
                         case 30:
                             Barramentos.setExterno(MAR.get());
+                            descricao2 += " <- MAR";
                             break;
                     }
                 }
@@ -126,36 +136,80 @@ public class UC {
                             break;
                         case 1:
                             BX.set(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "BX" + final1;
+                            }
+                            else descricao = "BX" + final1;
                             break;
                         case 2:
                             CX.set(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "CX" + final1;
+                            }
+                            else descricao = "CX" + final1;
                             break;
                         case 3:
                             DX.set(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "DX" + final1;
+                            }
+                            else descricao = "DX" + final1;
                             break;
                         case 4:
                             PC.set(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "PC" + final1;
+                            }
+                            else descricao = "PC" + final1;
                             break;
                         case 5:
                             MAR.set(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "MAR" + final1;
+                            }
+                            else descricao = "MAR" + final1;
                             break;
                         case 6:
                             MBR.set(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "MBR" + final1;
+                            }
+                            else descricao = "MBR" + final1;
                             break;
                         case 7:
                             IR.set(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "IR" + final1;
+                            }
+                            else descricao = "IR" + final1;
                             break;
                         case 8:
                             IR.setP2(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "IR-P2" + final1;
+                            }
+                            else descricao = "IR-P2" + final1;
                             break;
                         case 9:
                             IR.setP1(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "IR-P1" + final1;
+                            }
+                            else descricao = "IR-P1" + final1;
                             break;
                         case 10:
                             ULA.setX(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "ULA-X" + final1;
+                            }
+                            else descricao = "ULA-X" + final1;
                             break;
                         case 11:
                             ULA.setULA(Barramentos.getInterno());
+                            if(descricao.charAt(0) != ' ') {
+                                descricao += "\n" + "ULA" + final1;
+                            }
+                            else descricao = "ULA" + final1;
                             break;
                     }
                 }
