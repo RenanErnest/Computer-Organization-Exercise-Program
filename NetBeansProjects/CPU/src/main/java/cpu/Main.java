@@ -150,7 +150,6 @@ public class Main {
             
             i++;
         }
-        //criar um Hashmap(palavraHorizontal,comentário) onde cada palavra horizontal tem seu literal ex: MAR <- PC
     }
     
     public static String normaliza(String x) {

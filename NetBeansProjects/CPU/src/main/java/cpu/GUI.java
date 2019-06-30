@@ -21,6 +21,8 @@ public class GUI extends javax.swing.JFrame {
     //Highlight
     Highlighter highlighter;
     Highlighter.HighlightPainter painter;
+    int linha;
+    int ultimaLinha;
     
     //fim do programa
     boolean ultimaInstrucao = false;
@@ -35,6 +37,15 @@ public class GUI extends javax.swing.JFrame {
         //Highlight
         this.highlighter = CodigoText.getHighlighter();
         this.painter = new DefaultHighlighter.DefaultHighlightPainter(Color.pink);
+        linha = 0;
+        ultimaLinha=0;
+        String code = CodigoText.getText();
+        Scanner scan = new Scanner(code);
+        while(scan.hasNextLine()) {
+            scan.nextLine();
+            ultimaLinha++;
+        }
+        ultimaLinha--;
     }
     
     /**
@@ -493,6 +504,10 @@ public class GUI extends javax.swing.JFrame {
 
     private void StepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StepActionPerformed
         
+        //zerando descricao das palavras a cada step
+        Main.description = "";
+
+        //step da UC
         UC.step();
         
         //Atualização das caixas de texto
@@ -514,22 +529,33 @@ public class GUI extends javax.swing.JFrame {
         clock.setText(Integer.toString(Integer.parseInt(clock.getText()) + 1));
         
         //Highlight
-        if(UC.getCBR().equals("11111111111111111111111111111111111")) {
+        if(palavra.getText().equals("11111111111111111111111111111111111")) {
+            descricao.setText("Palavra para início do ciclo de execução!");
+            
             highlighter.removeAllHighlights();
-            int p0 = 0; //começo do highlight
-            int p1 = 0; //fim do highlight
-            Scanner scan = new Scanner(Main.opcodeInMemory);
-            while(scan.hasNextLine()) {
-                String s = scan.nextLine();
-                if(Main.assemblyOpcode.get(s).equals(IR.get())) {
-                    p0 = Main.opcodeInMemory.indexOf(s); //Pega o primeiro que bater a string
-                    String aux = Main.Code.substring(p0);
-                    Scanner scan2 = new Scanner(aux);
-                    String aux2 = scan2.nextLine();
-                    p1 = p0 + aux2.length();
-                }
+            
+            String code = CodigoText.getText();
+            Scanner scan = new Scanner(code);
+            int j = 1;
+            while(Memoria.getConstante(Integer.parseInt(PC.get(),2)-j).length() < 16) j++;
+            linha = Integer.parseInt(PC.get(),2)-j;
+            int ct = 0;
+            for(int i = 0; i < linha; i++) { //todas as constantes antes da linha
+                if(Memoria.getConstante(i).length() < 16) ct++;
             }
+            linha -= ct;
+            int p0 = 0;
+            for(int i = linha; i > 0; i--) {
+                String x = scan.nextLine();
+                p0 = code.indexOf(x, p0);
+                //System.out.println(p0);
+            }
+            String find = scan.nextLine(); //código que esta sendo executado
+            p0 = code.indexOf(find, p0); //começo do highlight
+            int p1 = p0 + find.length(); //fim do highlight
+            
             try { highlighter.addHighlight(p0, p1, painter); } catch(Exception e){}
+            //linha++;
         }
         if (Integer.parseInt(UC.getCAR(),2) == 0) { //novo ciclo de busca
             highlighter.removeAllHighlights();
@@ -542,9 +568,16 @@ public class GUI extends javax.swing.JFrame {
             Step.setEnabled(false);
         }
         
-        if (UC.getCBR().equals("00000000000000000000000000000000000")) {
+        //verificando fim de programa
+        if (palavra.getText().equals("00000000000000000000000000000000000")) {
+            descricao.setText("Palavra para início do ciclo de busca!");
             String conteudo = Memoria.getConstante(Integer.parseInt(PC.get(),2));
-            if (conteudo == null) Step.setEnabled(false);
+            if (conteudo == null) {
+                if(linha == ultimaLinha && Integer.parseInt(IR.get(),2) < 701) { //>=701 - Jumps
+                    Step.setEnabled(false);
+                    descricao.setText("Fim do programa!");
+                }
+            }
         }
     }//GEN-LAST:event_StepActionPerformed
 

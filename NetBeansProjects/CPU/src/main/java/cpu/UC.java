@@ -25,10 +25,8 @@ public class UC {
     public static Map<String,String> instrucaoDescricao = new HashMap<String,String>();
     
     public static void step() {
-        //UC pegará o OPCODE
-        //Do OPCODE ela tem que transformar em clocks e sinais de controle
-        //Ela que deve coordenar toda a operação
         
+        //micro operações para o funcionamento da UC
         CBR = Firmware[Integer.parseInt(CAR,2)];
         CAR = Integer.toBinaryString(Integer.parseInt(CAR,2) + 1); //INC CAR
         if (CBR.equals("0")) CAR = "0"; //retorna para o ciclo de busca
