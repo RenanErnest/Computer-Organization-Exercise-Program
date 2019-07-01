@@ -47,7 +47,6 @@ public class ULA {
         String binString = "";
         if(valor < 0) binString = "-" + Integer.toBinaryString(-valor);
         else binString = "+" + Integer.toBinaryString(valor);
-        System.out.println(binString);
         if(binString.length() > 16) UC.setOverflow(true);
         else UC.setOverflow(false);
     }
@@ -78,7 +77,7 @@ public class ULA {
     }
 
     private static void cmp() {
-        String aux = Integer.toBinaryString(parseInt(x) - parseInt(ula));
+        String aux = Main.normaliza(Integer.toBinaryString(parseInt(x) - parseInt(ula)));
         
         // atualizando flag ZERO
         if(parseInt(aux) == 0) UC.setZero(true);
@@ -93,7 +92,6 @@ public class ULA {
         String binString = "";
         if(valor < 0) binString = "-" + Integer.toBinaryString(-valor);
         else binString = "+" + Integer.toBinaryString(valor);
-        System.out.println(binString);
         if(binString.length() > 16) UC.setOverflow(true);
         else UC.setOverflow(false);
     }

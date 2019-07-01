@@ -155,13 +155,6 @@ public class Main {
     public static String normaliza(String x) {
         int length = x.length();
         if (length < 16) x = String.format("%16s", x).replace(' ', '0');
-        else if (length == 32){
-            char[] xc = x.toCharArray();
-            char[] normalizado = new char[16];
-            int diff = length - 16;
-            for(int i = length-1; i >= diff; i--) normalizado[i-diff] = xc[i];
-            x = new String(normalizado);
-        }
         return x;
     }
 
