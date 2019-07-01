@@ -33,8 +33,13 @@ public class UC {
         else if (CBR.equals("11111111111111111111111111111111111")) CAR = IR.get(); //OPCODE já é o endereço da Firmware
         else {
             
-            //porta de saida do PC
-            if (CBR.charAt(20) == '1') ULA.setX(Integer.toBinaryString(1)); //pra dar INC
+            //jumps (não executando nada caso não atendidas as condições)
+            if (IR.get().equals("0000001010111111")) if (!zero) return;
+            if (IR.get().equals("0000001011000001")) if (zero) return;
+            if (IR.get().equals("0000001011000011")) if (!sinal || zero) return;
+            if (IR.get().equals("0000001011000101")) if (!sinal && !zero) return;
+            if (IR.get().equals("0000001011000111")) if (sinal || zero) return;
+            if (IR.get().equals("0000001011001001")) if (sinal && !zero) return;
             
             //Sinais para a ULA
             if (CBR.charAt(34) == '1') {

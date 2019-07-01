@@ -511,19 +511,19 @@ public class GUI extends javax.swing.JFrame {
         UC.step();
         
         //Atualização das caixas de texto
-        ax.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(AX.get(),2))).replace(' ', '0'));
-        bx.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(BX.get(),2))).replace(' ', '0'));
-        cx.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(CX.get(),2))).replace(' ', '0'));
-        dx.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(DX.get(),2))).replace(' ', '0'));
-        pc.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(PC.get(),2))).replace(' ', '0'));
-        mar.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(MAR.get(),2))).replace(' ', '0'));
-        mbr.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(MBR.get(),2))).replace(' ', '0'));
-        ir.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(IR.get(),2))).replace(' ', '0'));
+        ax.setText(ULA.toHexString(ULA.parseInt(AX.get())));
+        bx.setText(ULA.toHexString(ULA.parseInt(BX.get())));
+        cx.setText(ULA.toHexString(ULA.parseInt(CX.get())));
+        dx.setText(ULA.toHexString(ULA.parseInt(DX.get())));
+        pc.setText(ULA.toHexString(ULA.parseInt(PC.get())));
+        mar.setText(ULA.toHexString(ULA.parseInt(MAR.get())));
+        mbr.setText(ULA.toHexString(ULA.parseInt(MBR.get())));
+        ir.setText(ULA.toHexString(ULA.parseInt(IR.get())));
         zero.setText(UC.getZero() ? "1" : "0");
         sinal.setText(UC.getSinal() ? "1" : "0");
         overflow.setText(UC.getOverflow() ? "1" : "0");
-        barramentoInterno.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(Barramentos.getInterno(),2))).replace(' ', '0'));
-        barramentoExterno.setText(String.format("%4s",Integer.toHexString(Integer.parseInt(Barramentos.getExterno(),2))).replace(' ', '0'));
+        barramentoInterno.setText(ULA.toHexString(ULA.parseInt(Barramentos.getInterno())));
+        barramentoExterno.setText(ULA.toHexString(ULA.parseInt(Barramentos.getExterno())));
         palavra.setText(UC.getCBR().equals("0") ? "00000000000000000000000000000000000" : UC.getCBR());
         descricao.setText(Main.description);
         clock.setText(Integer.toString(Integer.parseInt(clock.getText()) + 1));
@@ -571,12 +571,9 @@ public class GUI extends javax.swing.JFrame {
         //verificando fim de programa
         if (palavra.getText().equals("00000000000000000000000000000000000")) {
             descricao.setText("Palavra para início do ciclo de busca!");
-            String conteudo = Memoria.getConstante(Integer.parseInt(PC.get(),2));
-            if (conteudo == null) {
-                if(linha == ultimaLinha && Integer.parseInt(IR.get(),2) < 701) { //>=701 - Jumps
-                    Step.setEnabled(false);
-                    descricao.setText("Fim do programa!");
-                }
+            if(linha == ultimaLinha && Integer.parseInt(IR.get(),2) < 701) { //>=701 - Jumps
+                Step.setEnabled(false);
+                descricao.setText("Fim do programa!");
             }
         }
     }//GEN-LAST:event_StepActionPerformed
