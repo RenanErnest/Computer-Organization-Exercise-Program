@@ -47,7 +47,7 @@
                       <Group type="102" attributes="0">
                           <Component id="jLabel21" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="clock" pref="54" max="32767" attributes="0"/>
+                          <Component id="clock" pref="56" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
                           <Component id="Step" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -682,7 +682,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="11" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Clock"/>
+            <Property name="text" type="java.lang.String" value="Step"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="clock">
