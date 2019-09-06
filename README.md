@@ -1,3 +1,2 @@
-# EPOCD
-Exercício programa da disciplina de Organização de Computadores Digitais, simula o funcionamento da CPU profundamente, em específico, da UC.
-.
+# Computer-Organization-Exercise-Program
+A practical project of the Computer Organization class that simules the operation of the CPU and more specifically of the control unit. For this I and my group created an assembler that transform an simplified assembly code into OPCODES that we established. Then the UC's components start running the OPCODES from CPU's clocks step by step. We also did a GUI that shows the registers and buses. We hope you enjoy.
